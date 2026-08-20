@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Library</title>
+  </head>
+
+  <body>
+
+    <h1>My Library 📚</h1>
+
+    {% if message %}
+      <p>{{ message }}</p>
+    {% endif %}
+
+    <p>
+      <a href="/add_author">Add Author</a>
+      |
+      <a href="/add_book">Add Book</a>
+    </p>
+
+    <hr>
+
+    <h2>Search</h2>
+
+    <form action="/" method="GET">
+
+      <label for="search">Search Book:</label>
+
+      <input
+        type="text"
+        id="search"
+        name="search"
+        placeholder="Enter title..."
+      >
+
+      <input type="submit" value="Search">
+
+    </form>
+
+    <br>
+
+    <a href="/">Show all books</a>
+
+    <hr>
+
+    <h2>Sort Books</h2>
+
+    <p>
+      <a href="/?sort=title">Sort by Title</a>
+      |
+      <a href="/?sort=author">Sort by Author</a>
+    </p>
+
+    <hr>
+
+    {% if books %}
+
+      {% for book in books %}
+
+        <div>
+
+          <img
+            src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+            alt="Cover of {{ book.title }}"
+          >
+
+          <h2>{{ book.title }}</h2>
+
+          <p>
+            Author: {{ book.author.name }}
+          </p>
+
+          <p>
+            Publication Year: {{ book.publication_year }}
+          </p>
+
+          <p>
+            ISBN: {{ book.isbn }}
+          </p>
+
+          <form
+            action="/book/{{ book.id }}/delete"
+            method="POST"
+          >
+            <button type="submit">
+              Delete Book
+            </button>
+          </form>
+
+        </div>
+
+        <hr>
+
+      {% endfor %}
+
+    {% else %}
+
+      {% if search %}
+
+        <p>
+          No books found for "{{ search }}".
+        </p>
+
+      {% else %}
+
+        <p>
+          No books in the library.
+        </p>
+
+      {% endif %}
+
+    {% endif %}
+
+  </body>
+</html>
