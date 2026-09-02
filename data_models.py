@@ -5,6 +5,8 @@ db = SQLAlchemy()
 
 
 class Author(db.Model):
+    """Represents an author in the database."""
+
     __tablename__ = "authors"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -18,13 +20,17 @@ class Author(db.Model):
     )
 
     def __str__(self):
+        """Returns the name of the author."""
         return self.name
 
     def __repr__(self):
+        """Returns a simple representation of the author."""
         return f"<Author {self.name}>"
 
 
 class Book(db.Model):
+    """Represents a book in the database."""
+
     __tablename__ = "books"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -57,7 +63,9 @@ class Book(db.Model):
     )
 
     def __str__(self):
+        """Returns the title of the book."""
         return self.title
 
     def __repr__(self):
+        """Returns a simple representation of the book."""
         return f"<Book {self.title}>"
